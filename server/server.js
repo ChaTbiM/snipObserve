@@ -1,15 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Sequelize } = require('sequelize');
+
+
+const env = process.env.NODE_ENV || "development";
+require("dotenv").config({ path: `${env}.env` });
 
 const app = express()
-const port = 3000
+const port = 3000;
+
 
 app.use(bodyParser.json({ type: 'application/*+json' }))
-
-
-
-
 
 
 
@@ -27,17 +27,17 @@ app.get('/signup',(req,res)=>{
 
 });
 
-// DAtabase connection :: 
-const DB_CONNECTION = `mssql://root:root@localhost:1433/snip_observer`;
-const sequelize = new Sequelize(DB_CONNECTION);
 
-
+const {sequelize,User} = require('./database/db');
 app.listen(port, async () => {
   console.log(`Example app listening at http://localhost:${port}`)
 
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
+    // await sequelize.sync({ force: true });
+    // await sequelize.drop();
+
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
