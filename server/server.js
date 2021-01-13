@@ -1,37 +1,31 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-
-
 const env = process.env.NODE_ENV || "development";
 require("dotenv").config({ path: `${env}.env` });
 
-const app = express()
+// Server initialization and config
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 const port = 3000;
 
 
-app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.json())
+
+
+// Routes
+const {authRoutes} = require('./routes/index.js');
+
+app.get('/', (req, res) => { res.send('Hello World!') })
+
+app.use('/',authRoutes);
+
+// Database
+const {sequelize} = require('./database/db');
 
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.get('/login',(req,res)=>{
-  res.send('login page!')
-
-});
-
-app.get('/signup',(req,res)=>{
-    res.send('signup page!')
-
-});
-
-
-const {sequelize,User} = require('./database/db');
+// Starting the app
 app.listen(port, async () => {
   console.log(`Example app listening at http://localhost:${port}`)
-
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
