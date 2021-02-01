@@ -7,16 +7,17 @@
             <ion-item class="input__email">
               <ion-label position="floating">email</ion-label>
               <ion-input
+                v-model="email"
                 class="login__input "
                 clear-input
                 type="email"
                 placeholder="enter email"
               ></ion-input>
             </ion-item>
-
             <ion-item class=" input__password">
               <ion-label position="floating">password</ion-label>
               <ion-input
+                v-model="password"
                 class="login__input "
                 clear-input
                 type="password"
@@ -24,7 +25,11 @@
               ></ion-input>
             </ion-item>
 
-            <ion-button expand="block" color="button" class="login__button"
+            <ion-button
+              @click="loginHandler"
+              expand="block"
+              color="button"
+              class="login__button"
               >login</ion-button
             >
           </ion-card-content>
@@ -47,6 +52,35 @@ export default defineComponent({
     IonInput,
     IonItem
   },
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    loginHandler() {
+      const data = { email: this.email, password: this.password };
+
+      fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(token => {
+          this.$store.commit("AUTH_SUCCESS", token);
+          return token;
+        })
+        .then(token => {
+          this.$router.push("/home");
+
+          localStorage.setItem("token", token);
+        });
+    }
+  }
 });
 </script>
 
