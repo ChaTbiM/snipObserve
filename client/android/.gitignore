@@ -1,40 +1,11 @@
-# Specifies intentionally untracked files to ignore when using Git
-# http://git-scm.com/docs/gitignore
+# NPM renames .gitignore to .npmignore
+# In order to prevent that, we remove the initial "."
+# And the CLI then renames it
 
-*~
-*.sw[mnpcod]
-.tmp
-*.tmp
-*.tmp.*
-*.sublime-project
-*.sublime-workspace
-.DS_Store
-Thumbs.db
-UserInterfaceState.xcuserstate
-$RECYCLE.BIN/
+# Using Android gitignore template: https://github.com/github/gitignore/blob/master/Android.gitignore
 
-*.log
-log.txt
-npm-debug.log*
-
-/.idea
-/.ionic
-/.sass-cache
-/.sourcemaps
-/.versions
-/.vscode
-/coverage
-/dist
-/node_modules
-/platforms
-/plugins
-/www
-
-
-### Android ###
 # Built application files
 *.apk
-*.aar
 *.ap_
 *.aab
 
@@ -48,8 +19,7 @@ npm-debug.log*
 bin/
 gen/
 out/
-#  Uncomment the following line in case you need and you don't have the release build type files in your app
-# release/
+release/
 
 # Gradle files
 .gradle/
@@ -91,10 +61,6 @@ captures/
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
-.cxx/
-
-# Google Services (e.g. APIs or Firebase)
-# google-services.json
 
 # Freeline
 freeline.py
@@ -118,11 +84,8 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-### Android Patch ###
-gen-external-apklibs
-output.json
+# Cordova plugins for Capacitor
+capacitor-cordova-android-plugins
 
-# Replacement of .externalNativeBuild directories introduced
-# with Android Studio 3.5.
-
-# End of https://www.toptal.com/developers/gitignore/api/android
+# Copied web assets
+app/src/main/assets/public

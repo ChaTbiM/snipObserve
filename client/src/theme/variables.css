@@ -1,8 +1,18 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+/* Application Specific Variables */
+:root{
+  --primary-color: rgb(12,66,111);
+  --primary-color-dark:rgb(25,47,77);
+  --secondary-color:rgb(215,64,0);
+}
+
+
 /** Ionic CSS Variables **/
 :root {
+  /* Specefic App */
+  --ion-color-button:rgb(215,64,0);
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -230,3 +240,4 @@ http://ionicframework.com/docs/theming/ */
     --ion-card-background: #1e1e1e;
   }
 }
+
