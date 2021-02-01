@@ -12,7 +12,7 @@ const sequelize = new Sequelize(DB_CONNECTION);
 
 // get all models paths
 // const currentFile = path.basename(__filename);
-const modelsDirectory = __dirname+"\\models";
+const modelsDirectory = __dirname + "\\models";
 const modelsPath = fs.readdirSync(modelsDirectory).filter((file) => {
   const returnFile =
     file.indexOf(".") !== 0 && file.slice(-3) === ".js";
@@ -36,6 +36,5 @@ Object.keys(models).forEach((model) => {
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
 
 module.exports = db;
