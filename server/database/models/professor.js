@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "User",
+  const Professor = sequelize.define(
+    "Professor",
     {
       id: {
         type: DataTypes.UUID,
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "users",
+      tableName: "professors",
       timestamps: false
 
     }
@@ -35,5 +35,5 @@ module.exports = (sequelize, DataTypes) => {
 
   // };
 
-  return User;
+  return Professor;
 };
