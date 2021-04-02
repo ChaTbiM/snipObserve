@@ -1,21 +1,86 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
+    <ion-header translucent>
       <ion-toolbar>
-        <ion-title>Dashboard </ion-title>
+        <ion-title>List</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Dashboard , User is authenticated </ion-title>
-        </ion-toolbar>
-      </ion-header>
+    <ion-content fullscreen>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title> 3rd year </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item-divider color="primary">
+              <ion-label> COMPUTER SCIENC </ion-label>
+            </ion-item-divider>
+            <ion-item>
+              <ion-label>
+                Group Number: 1
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                Group Number: 1
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                Group Number: 1
+              </ion-label>
+            </ion-item>
+          </ion-list>
 
-      <div id="container">
-        <strong>Dashboard , User is authenticated</strong>
-      </div>
+          <ion-list>
+            <ion-item-divider color="primary">
+              <ion-label> Mathematics </ion-label>
+            </ion-item-divider>
+            <ion-item>
+              <ion-label>
+                Group Number: 1
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                Group Number: 1
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title> 2nd year </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item-divider color="primary">
+              <ion-label> Mathematics </ion-label>
+            </ion-item-divider>
+            <ion-item @click="clickable()">
+              <ion-label>
+                Group Number: 1
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                Group Number: 1
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <!-- <ion-icon name="arrow-forward-circle-outline"></ion-icon> -->
+              <ion-label>
+                <!-- <span>Group Number: 10</span> -->
+                <!-- ICONS NOT WORKING -->
+                <ion-icon name="md-add"></ion-icon>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
     </ion-content>
   </ion-page>
 </template>
@@ -28,7 +93,12 @@ import {
   IonTitle,
   IonToolbar
 } from "@ionic/vue";
+
 import { defineComponent } from "vue";
+
+function clickable() {
+  console.log("clicked");
+}
 
 export default defineComponent({
   name: "Home",
@@ -38,6 +108,9 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar
+  },
+  methods: {
+    clickable
   }
 });
 </script>
