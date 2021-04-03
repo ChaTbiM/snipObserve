@@ -2,83 +2,30 @@
   <ion-page>
     <ion-header translucent>
       <ion-toolbar>
-        <ion-title>List</ion-title>
+        <ion-title>Groups</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content fullscreen>
-      <ion-card>
+      <ion-card v-for="(specialty, index) in specialties" :key="index">
         <ion-card-header>
-          <ion-card-title> 3rd year </ion-card-title>
+          <ion-card-title @click.prevent="toggleSpecialty(index)">
+            <!-- Specialities -->
+            <ion-item-divider color="primary">
+              <ion-label>
+                {{ specialtyCapitalized(specialty.name) }}
+              </ion-label>
+            </ion-item-divider>
+          </ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-list>
-            <ion-item-divider color="primary">
-              <ion-label> COMPUTER SCIENC </ion-label>
-            </ion-item-divider>
-            <ion-item>
-              <ion-label>
-                Group Number: 1
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                Group Number: 1
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                Group Number: 1
-              </ion-label>
-            </ion-item>
-          </ion-list>
-
-          <ion-list>
-            <ion-item-divider color="primary">
-              <ion-label> Mathematics </ion-label>
-            </ion-item-divider>
-            <ion-item>
-              <ion-label>
-                Group Number: 1
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                Group Number: 1
-              </ion-label>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title> 2nd year </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-list>
-            <ion-item-divider color="primary">
-              <ion-label> Mathematics </ion-label>
-            </ion-item-divider>
-            <ion-item @click="clickable()">
-              <ion-label>
-                Group Number: 1
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                Group Number: 1
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <!-- <ion-icon name="arrow-forward-circle-outline"></ion-icon> -->
-              <ion-label>
-                <!-- <span>Group Number: 10</span> -->
-                <!-- ICONS NOT WORKING -->
-                <ion-icon name="md-add"></ion-icon>
-              </ion-label>
-            </ion-item>
-          </ion-list>
+          <span v-if="!specialty.isCollapsed">
+            <group-list
+              @toggleGroup="toggleGroup"
+              :collection="specialty.collection"
+              :specialtyIndex="index"
+            />
+          </span>
         </ion-card-content>
       </ion-card>
     </ion-content>
@@ -86,6 +33,7 @@
 </template>
 
 <script >
+import GroupList from "./GroupList";
 import {
   IonContent,
   IonHeader,
@@ -96,10 +44,6 @@ import {
 
 import { defineComponent } from "vue";
 
-function clickable() {
-  console.log("clicked");
-}
-
 export default defineComponent({
   name: "Home",
   components: {
@@ -107,10 +51,76 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    GroupList
+  },
+  data: () => {
+    return {
+      specialties: [
+        {
+          name: "computer science",
+          collection: [
+            {
+              grade: "first",
+              groups: [1, 3, 5],
+              isCollapsed: true
+            },
+            {
+              grade: "third",
+              groups: [1, 3, 5],
+              isCollapsed: true
+            }
+          ],
+          isCollapsed: false
+        },
+        {
+          name: "mathematics",
+          collection: [
+            {
+              grade: "second",
+              groups: [2, 3, 5],
+              isCollapsed: true
+            },
+            {
+              grade: "fourth",
+              groups: [7, 3, 5],
+              isCollapsed: true
+            }
+          ],
+          isCollapsed: false
+        },
+        {
+          name: "english",
+          collection: [
+            {
+              grade: "thrid",
+              groups: [7, 8],
+              isCollapsed: true
+            },
+            {
+              grade: "fifth",
+              groups: [9, 10],
+              isCollapsed: true
+            }
+          ],
+          isCollapsed: false
+        }
+      ],
+      isSpecialtyCollapsed: [false, false, false]
+    };
   },
   methods: {
-    clickable
+    specialtyCapitalized(specialty) {
+      return specialty.toUpperCase();
+    },
+    toggleSpecialty(index) {
+      this.specialties[index].isCollapsed = !this.specialties[index]
+        .isCollapsed;
+    },
+    toggleGroup(specialtyIndex, index) {
+      this.specialties[specialtyIndex].collection[index].isCollapsed = !this
+        .specialties[specialtyIndex].collection[index].isCollapsed;
+    }
   }
 });
 </script>
