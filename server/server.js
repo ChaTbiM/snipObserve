@@ -1,4 +1,4 @@
-const env = process.env.NODE_ENV || "development";
+const env = process.env.NODE_ENV || "production";
 require("dotenv").config({ path: `${env}.env` });
 
 // Server initialization and config
