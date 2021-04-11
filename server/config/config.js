@@ -1,9 +1,7 @@
 const env = process.env.NODE_ENV || "development";
 require("dotenv").config({ path: `${env}.env` });
 
-console.log("env",process.env.NODE_ENV);
-
-const generateConfig = ()=>{
+const generateConfig = () => {
   return {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
@@ -15,7 +13,7 @@ const generateConfig = ()=>{
 }
 
 module.exports = {
-  development: generateConfig(),  
-  test:  generateConfig(),
-  production:  generateConfig(),
+  development: generateConfig(),
+  test: generateConfig(),
+  production: generateConfig(),
 };

@@ -17,9 +17,6 @@ const { authRoutes } = require('./routes/index.js');
 
 app.use('/', authRoutes);
 
-// Database
-const { sequelize } = require('./database/db');
-
 
 
 // Starting the app
