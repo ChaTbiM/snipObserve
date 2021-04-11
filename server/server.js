@@ -19,6 +19,9 @@ app.use('/', authRoutes);
 
 
 
+const { sequelize } = require('./database/db'); 
+
+
 // Starting the app
 app.listen(port, async () => {
   console.log(`Example app listening at http://localhost:${port}`)

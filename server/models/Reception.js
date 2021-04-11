@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     rowid: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      autoIncrement: true
+      autoIncrement: true,
+      primaryKey:true
     },
     boite: {
       type: DataTypes.STRING(70),

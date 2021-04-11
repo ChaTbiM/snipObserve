@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     idi: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      autoIncrement: true
+      autoIncrement: true,
+      primaryKey:true
     },
     nIns: {
       type: DataTypes.STRING(20),
