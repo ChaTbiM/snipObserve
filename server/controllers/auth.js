@@ -1,8 +1,9 @@
 const {loginService} = require('../services/user');
 
-function login(req,res){
-    let userInfo = {email,password} = req.body;
-    
+async function login(req,res){
+    let {email,password} = req.body;
+    let userInfo = {email,password};
+
     let response = {
         success:false,
         data:null,
@@ -10,21 +11,19 @@ function login(req,res){
     };
 
     try {
-        const token = loginService(userInfo);
+        const token = await loginService(userInfo);
 
         response.data = token;
         response.message = "user is logged in !";
+        response.success = true;
 
-        return response;
+        return res.json(response);
     } catch (error) {
         response.message = "email or password is wrong";
 
-        return response;
+        return res.json(response);
     }
 }
 
-const authController = {
-    loginController:login,
-}
 
-module.exports = {authController};
+module.exports = {loginController:login};

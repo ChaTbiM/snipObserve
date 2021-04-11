@@ -19,7 +19,16 @@ app.use('/', authRoutes);
 
 
 
-const { sequelize } = require('./database/db'); 
+const { sequelize, models } = require('./database/db');
+
+// const quickOp = async () => {
+//   const professor = await models['Enseignants'].findOne({ where: { refEnseignant: 2 } });
+
+//   professor.pwdEnseignant = '$2b$10$I.qE.63koIG2rbcKJlJv3umYfKoK4NlDSFhlZyNnyXcF85jNprera';
+//   await professor.save();
+
+// }
+// quickOp();
 
 
 // Starting the app
