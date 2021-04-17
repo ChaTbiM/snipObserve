@@ -75,7 +75,7 @@ export default defineComponent({
           return token;
         })
         .then(token => {
-          this.$router.push("/home");
+          this.$router.push("/groups");
 
           localStorage.setItem("token", token);
         });

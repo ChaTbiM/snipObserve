@@ -1,11 +1,6 @@
 <template>
   <ion-page>
-    <ion-header translucent>
-      <ion-toolbar>
-        <ion-title>Groups</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
+    <Header />
     <ion-content fullscreen>
       <ion-card v-for="(specialty, index) in specialties" :key="index">
         <ion-card-header>
@@ -20,7 +15,7 @@
         </ion-card-header>
         <ion-card-content>
           <span v-if="!specialty.isCollapsed">
-            <group-list
+            <groups-list
               @toggleGroup="toggleGroup"
               :collection="specialty.collection"
               :specialtyIndex="index"
@@ -33,26 +28,19 @@
 </template>
 
 <script >
-import GroupList from "./GroupList";
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar
-} from "@ionic/vue";
-
 import { defineComponent } from "vue";
+import { IonContent, IonPage } from "@ionic/vue";
+
+import GroupsList from "../components/GroupsList";
+import Header from "../components/Header";
 
 export default defineComponent({
-  name: "Home",
+  name: "Groups",
   components: {
     IonContent,
-    IonHeader,
     IonPage,
-    IonTitle,
-    IonToolbar,
-    GroupList
+    GroupsList,
+    Header
   },
   data: () => {
     return {
@@ -152,5 +140,11 @@ export default defineComponent({
 
 #container a {
   text-decoration: none;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
+import Groups from '../views/Groups'
+
 
 // import store from '../store' // your vuex store 
 
@@ -35,16 +36,24 @@ const routes = [
     // beforeEnter: ifNotAuthenticated
   },
   {
-    path: '/home',
-    name: "Home",
-    component: Dashboard,
+    path: '/groups',
+    name: "Groups",
+    component: Groups,
+    // beforeEnter: ifAuthenticated
+  },
+  {
+    path: '/group/:id',
+    name: "Group",
+    component: Groups,
     // beforeEnter: ifAuthenticated
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass: "active-route",
+  linkExactActiveClass: "active-routee"
 })
 
 export default router

@@ -14,7 +14,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "GroupItem",
+  name: "GroupListItem",
   props: ["groups"],
   data: () => {
     return {
