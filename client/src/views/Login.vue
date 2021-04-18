@@ -58,7 +58,7 @@ export default defineComponent({
       const { Http } = Plugins;
       const { data, status } = await Http.request({
         method: "POST",
-        url: "http://localhost:3000/login",
+        url: "http://localhost:3000/login/",
         headers: {
           "Content-Type": "application/json"
         },
