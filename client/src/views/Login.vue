@@ -41,6 +41,8 @@
 
 <script >
 import { defineComponent } from "vue";
+import "@capacitor-community/http";
+import { Plugins } from "@capacitor/core";
 
 export default defineComponent({
   name: "Home",
@@ -51,26 +53,23 @@ export default defineComponent({
     };
   },
   methods: {
-    loginHandler() {
-      const data = { email: this.email, password: this.password };
-
-      fetch("http://localhost:3000/login", {
+    async loginHandler() {
+      const requestData = { email: this.email, password: this.password };
+      const { Http } = Plugins;
+      const { data, status } = await Http.request({
         method: "POST",
+        url: "http://localhost:3000/login",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
-      })
-        .then(response => response.json())
-        .then(token => {
-          this.$store.commit("AUTH_SUCCESS", token);
-          return token;
-        })
-        .then(token => {
-          this.$router.push("/groups");
+        data: { ...requestData }
+      });
 
-          localStorage.setItem("token", token);
-        });
+      if (status === 200 && data.success) {
+        this.$store.commit("AUTH_SUCCESS", data.data);
+        localStorage.setItem("token", data.data);
+        this.$router.push("/groups");
+      }
     }
   }
 });

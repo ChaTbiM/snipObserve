@@ -866,6 +866,13 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@capacitor-community/http@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@capacitor-community/http/-/http-0.3.0.tgz#f42a8504a053ecf5888f580e3fd528ac4e8d35a2"
+  integrity sha512-0Cn0iyXNF5iNydivkGmQ5Plfn6epAMfO8ew8cthmnLlS8kXWQOGPvQrSYgNBd87l1ViPGznz4mN29TT4wJA2Ag==
+  dependencies:
+    "@capacitor/core" latest
+
 "@capacitor/android@^2.4.6":
   version "2.4.7"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-2.4.7.tgz#c7edc5322dbd1db79c61b1f4e579b7b81024ce5d"
@@ -892,6 +899,13 @@
   version "2.4.6"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.6.tgz#71cc6e23ef37fbb47c3c1736f1dea47302a5e22a"
   integrity sha512-3KLSMorCELA5RNRXwHOGlRGuxXaxCEYHC29wOUxObicI2mf14hbMJWylt4QBzNmSqh3/ha7u4/CAZMoJUQR/QA==
+  dependencies:
+    tslib "^1.9.0"
+
+"@capacitor/core@latest":
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.4.7.tgz#f3b4d5728db7e764c1153da5e67d369bda35b772"
+  integrity sha512-ZPzXXQ4EPwR/ZhNDkmlxyzw4FvquIl/ROj8HMMM0MEd4xZfM8ulNGPIL6br9TWdlFLGBKq40eymPZjKaivGnig==
   dependencies:
     tslib "^1.9.0"
 
