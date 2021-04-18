@@ -1,13 +1,7 @@
 <template>
-  <ion-item
-    @mouseenter="hover = true"
-    @mouseleave="hover = false"
-    v-for="(group, groupIndex) in groups"
-    :key="groupIndex"
-  >
-    <ion-label> Group Number: {{ group }} </ion-label>
-    hovered ?
-  </ion-item>
+  <ion-label @mouseenter="hover = true" @mouseleave="hover = false">
+    Group Number: {{ groupNumber }}
+  </ion-label>
 </template>
 
 <script>
@@ -15,7 +9,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "GroupListItem",
-  props: ["groups"],
+  props: ["groupNumber"],
   data: () => {
     return {
       hover: false

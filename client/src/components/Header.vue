@@ -8,14 +8,9 @@
 
 <script>
 import { defineComponent } from "vue";
-import { IonHeader, IonToolbar, IonMenuButton } from "@ionic/vue";
 export default defineComponent({
   name: "Header",
-  components: {
-    IonHeader,
-    IonToolbar,
-    IonMenuButton
-  }
+  components: {}
 });
 </script>
 

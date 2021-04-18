@@ -40,18 +40,10 @@
 </template>
 
 <script >
-import { IonContent, IonPage, IonLabel, IonInput, IonItem } from "@ionic/vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Home",
-  components: {
-    IonContent,
-    IonPage,
-    IonLabel,
-    IonInput,
-    IonItem
-  },
   data() {
     return {
       email: "",

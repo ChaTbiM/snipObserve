@@ -29,16 +29,13 @@
 
 <script >
 import { defineComponent } from "vue";
-import { IonContent, IonPage } from "@ionic/vue";
 
-import GroupsList from "../components/GroupsList";
 import Header from "../components/Header";
+import GroupsList from "../components/GroupsList";
 
 export default defineComponent({
   name: "Groups",
   components: {
-    IonContent,
-    IonPage,
     GroupsList,
     Header
   },
@@ -50,12 +47,21 @@ export default defineComponent({
           collection: [
             {
               grade: "first",
-              groups: [1, 3, 5],
+              groups: [
+                { id: 1, number: 1 },
+                { id: 2, number: 5 },
+                { id: 3, number: 3 }
+              ],
               isCollapsed: true
             },
             {
               grade: "third",
-              groups: [1, 3, 5],
+              groups: [
+                { id: 3, number: 1 },
+                { id: 4, number: 5 },
+                { id: 5, number: 3 }
+              ],
+
               isCollapsed: true
             }
           ],
@@ -66,28 +72,20 @@ export default defineComponent({
           collection: [
             {
               grade: "second",
-              groups: [2, 3, 5],
+              groups: [
+                { id: 6, number: 1 },
+                { id: 7, number: 5 },
+                { id: 8, number: 3 }
+              ],
               isCollapsed: true
             },
             {
               grade: "fourth",
-              groups: [7, 3, 5],
-              isCollapsed: true
-            }
-          ],
-          isCollapsed: false
-        },
-        {
-          name: "english",
-          collection: [
-            {
-              grade: "thrid",
-              groups: [7, 8],
-              isCollapsed: true
-            },
-            {
-              grade: "fifth",
-              groups: [9, 10],
+              groups: [
+                { id: 9, number: 1 },
+                { id: 10, number: 5 },
+                { id: 11, number: 3 }
+              ],
               isCollapsed: true
             }
           ],

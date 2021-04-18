@@ -10,9 +10,15 @@
     </ion-item-divider>
     <!-- Per Group -->
     <ion-item-group v-if="!item.isCollapsed">
-      <ion-item v-for="(group, groupIndex) in item.groups" :key="groupIndex">
-        <ion-label> Group Number: {{ group }} </ion-label>
-        <span>go</span>
+      <ion-item
+        v-for="(group, groupIndex) in item.groups"
+        :key="groupIndex"
+        @click="this.$router.push({ name: 'Group', params: { id: group.id } })"
+      >
+        <!-- <ion-label router-link="/group/15">
+          Group Number: {{ group }}
+        </ion-label> -->
+        <GroupListItem :groupNumber="group.number" />
       </ion-item>
     </ion-item-group>
   </ion-list>
@@ -20,12 +26,12 @@
 
 <script>
 import { defineComponent } from "vue";
-// import GroupItem from "./GroupItem";
+import GroupListItem from "./GroupsListItem";
 
 export default defineComponent({
   name: "GroupsList",
   components: {
-    // GroupItem
+    GroupListItem
   },
   props: ["collection", "isGradeCollapsed", "specialtyIndex"],
   data: () => {

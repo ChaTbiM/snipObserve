@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Login from '../views/Login.vue'
 import Groups from '../views/Groups'
-
+import Students from '../views/Students'
 
 import store from '../store' // your vuex store 
 
@@ -44,9 +44,9 @@ const routes = [
   {
     path: '/group/:id',
     name: "Group",
-    component: Groups,
+    component: Students,
     beforeEnter: ifAuthenticated
-  }
+  },
 ]
 
 const router = createRouter({

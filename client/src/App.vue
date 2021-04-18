@@ -9,10 +9,8 @@
       <ion-content>
         <ion-list>
           <ion-item router-link="/groups">
-            <!-- <router-link tag="button" :aria-disabled="true" to="/groups"> -->
             <ion-icon :icon="happy" slot="start" />
             <ion-label>Groups</ion-label>
-            <!-- </router-link> -->
           </ion-item>
           <ion-item router-link="/profile"
             ><ion-icon :icon="happy" slot="start" />
@@ -27,19 +25,6 @@
 </template>
 
 <script>
-import {
-  IonApp,
-  IonContent,
-  IonRouterOutlet,
-  IonHeader,
-  IonItem,
-  IonList,
-  IonMenu,
-  IonTitle,
-  IonToolbar,
-  IonIcon
-} from "@ionic/vue";
-
 import { happy } from "ionicons/icons";
 
 import { defineComponent } from "vue";
@@ -50,18 +35,6 @@ export default defineComponent({
     return {
       happy
     };
-  },
-  components: {
-    IonRouterOutlet,
-    IonApp,
-    IonContent,
-    IonHeader,
-    IonItem,
-    IonList,
-    IonMenu,
-    IonTitle,
-    IonToolbar,
-    IonIcon
   }
 });
 </script>
