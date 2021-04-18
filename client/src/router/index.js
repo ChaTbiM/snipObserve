@@ -3,23 +3,23 @@ import Login from '../views/Login.vue'
 import Groups from '../views/Groups'
 
 
-// import store from '../store' // your vuex store 
+import store from '../store' // your vuex store 
 
-// const ifNotAuthenticated = (to, from, next) => {
-//   if (!store.getters.tokenValue) {
-//     next()
-//     return
-//   }
-//   next('/home')
-// }
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.tokenValue) {
+    next()
+    return
+  }
+  next('/groups')
+}
 
-// const ifAuthenticated = (to, from, next) => {
-//   if (store.getters.tokenValue) {
-//     next()
-//     return
-//   }
-//   next('/login')
-// }
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.tokenValue) {
+    next()
+    return
+  }
+  next('/login')
+}
 
 
 
@@ -33,19 +33,19 @@ const routes = [
     path: '/login',
     name: "Login",
     component: Login,
-    // beforeEnter: ifNotAuthenticated
+    beforeEnter: ifNotAuthenticated
   },
   {
     path: '/groups',
     name: "Groups",
     component: Groups,
-    // beforeEnter: ifAuthenticated
+    beforeEnter: ifAuthenticated
   },
   {
     path: '/group/:id',
     name: "Group",
     component: Groups,
-    // beforeEnter: ifAuthenticated
+    beforeEnter: ifAuthenticated
   }
 ]
 

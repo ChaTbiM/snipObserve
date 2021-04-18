@@ -14,8 +14,9 @@
             <ion-label>Groups</ion-label>
             <!-- </router-link> -->
           </ion-item>
-          <ion-item @click="$router.push('/group/15')" router-link="/profile"
-            >Profile</ion-item
+          <ion-item router-link="/profile"
+            ><ion-icon :icon="happy" slot="start" />
+            <ion-label>Profile</ion-label></ion-item
           >
         </ion-list>
       </ion-content>
