@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     refCours: {
       type: DataTypes.STRING(15),
       allowNull: false,
+      primaryKey: true,
       field: 'Réf_Cours'
     },
     cours: {
@@ -203,6 +204,15 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'Cours',
     schema: 'dbo',
-    timestamps: false
+    timestamps: false,
+    indexes: [
+      {
+        name: "PK_Cours",
+        unique: true,
+        fields: [
+          { name: "Réf_Cours" },
+        ]
+      },
+    ]
   });
 };

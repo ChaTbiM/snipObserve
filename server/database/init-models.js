@@ -344,6 +344,8 @@ var _Inscrip = require("../models/Inscrip");
 var _LogResExcel = require("../models/LogResExcel");
 var _Reception = require("../models/Reception");
 var _Utilisateur = require("../models/Utilisateur");
+var _Sessions = require("../models/Sessions");
+
 
 function initModels(sequelize) {
   var Affectations = _Affectations(sequelize, DataTypes);
@@ -692,6 +694,10 @@ function initModels(sequelize) {
   var Reception = _Reception(sequelize, DataTypes);
   var Utilisateur = _Utilisateur(sequelize, DataTypes);
 
+  // Added Models
+  var Sessions = _Sessions(sequelize, DataTypes);
+
+
   Enseignants.belongsTo(Departements, { as: "refDepartementDepartement", foreignKey: "refDepartement"});
   Departements.hasMany(Enseignants, { as: "enseignants", foreignKey: "refDepartement"});
   Filieres.belongsTo(Departements, { as: "refDepartementDepartement", foreignKey: "refDepartement"});
@@ -704,6 +710,13 @@ function initModels(sequelize) {
   Grades.hasMany(Enseignants, { as: "enseignants", foreignKey: "refGrade"});
   Etudiants.belongsTo(Wilayas, { as: "codeWilayaWilaya", foreignKey: "codeWilaya"});
   Wilayas.hasMany(Etudiants, { as: "etudiants", foreignKey: "codeWilaya"});
+
+  // Added Associations
+  Sessions.belongsTo(Cours, { as: "class", foreignKey: "classId"});
+  Cours.hasMany(Sessions, { as: "sessions", foreignKey: "classId"});
+  Sessions.belongsTo(Enseignants, { as: "teacher", foreignKey: "teacherId"});
+  Enseignants.hasMany(Sessions, { as: "sessions", foreignKey: "teacherId"});
+
 
   return {
     Affectations,
@@ -1051,6 +1064,8 @@ function initModels(sequelize) {
     LogResExcel,
     Reception,
     Utilisateur,
+    // Added
+    Sessions
   };
 }
 module.exports = initModels;

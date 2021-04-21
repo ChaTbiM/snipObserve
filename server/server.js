@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
+const { sequelize } = require('./database/db');
 const port = 3000;
 
 app.use(cors());
@@ -19,16 +20,7 @@ app.use('/', authRoutes);
 
 
 
-const { sequelize, models } = require('./database/db');
 
-// const quickOp = async () => {
-//   const professor = await models['Enseignants'].findOne({ where: { refEnseignant: 2 } });
-
-//   professor.pwdEnseignant = '$2b$10$I.qE.63koIG2rbcKJlJv3umYfKoK4NlDSFhlZyNnyXcF85jNprera';
-//   await professor.save();
-
-// }
-// quickOp();
 
 
 // Starting the app
