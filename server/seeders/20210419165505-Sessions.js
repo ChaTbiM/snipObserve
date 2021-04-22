@@ -14,40 +14,52 @@ module.exports = {
     */
      await queryInterface.bulkInsert('Sessions', [
        {
-        teacher_id: 2,
-        group_number: 1,
-        date_time: "2021-04-20 09:00:00",
-        class_id: "A.P.P_MS"
-      },
-      {
-        teacher_id: 2,
+        teacher_id: 103,
         group_number: 2,
-        date_time: "2021-04-20 10:05:00",
-        class_id: "A.P.P_MS"
+        date_time: "2021-04-27 08:30:00",
+        class_id: "M211_LS"
       },
       {
-        teacher_id: 2,
+        teacher_id: 103,
         group_number: 1,
-        date_time: "2021-04-20 11:10:00",
-        class_id: "A.N.C_MS"
+        date_time: "2021-04-27 9:30:00",
+        class_id: "M211_LS"
       },
       {
-        teacher_id: 2,
+        teacher_id: 103,
+        group_number: 4,
+        date_time: "2021-04-27 10:45:00",
+        class_id: "M211_LS"
+      },
+      {
+        teacher_id: 103,
+        group_number: 3,
+        date_time: "2021-04-27 11:45:00",
+        class_id: "M211_LS"
+      },
+      {
+        teacher_id: 103,
         group_number: 2,
-        date_time: "2021-04-20 13:00:00",
-        class_id: "Agru_LA"
+        date_time: "2021-04-25 08:30:00",
+        class_id: "M211_LS"
       },
       {
-        teacher_id: 2,
-        group_number: 2,
-        date_time: "2021-04-20 14:05:00",
-        class_id: "ABSE5_LA"
-      },
-      {
-        teacher_id: 2,
+        teacher_id: 103,
         group_number: 1,
-        date_time: "2021-04-20 15:10:00",
-        class_id: "ABSE5_LA"
+        date_time: "2021-04-25 09:30:00",
+        class_id: "M211_LS"
+      },
+      {
+        teacher_id: 103,
+        group_number: 3,
+        date_time: "2021-04-25 11:45:00",
+        class_id: "M211_LS"
+      },
+      {
+        teacher_id: 103,
+        group_number: 4,
+        date_time: "2021-04-25 10:45:00",
+        class_id: "M211_LS"
       },
     ], {});
   },

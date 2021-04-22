@@ -3,17 +3,10 @@ const bcrypt = require("bcrypt");
 let router = express.Router()
 const {loginController} = require('../controllers/auth');
 
-const UserServices = require('../services/user');
-
 router.post('/login', loginController);
 
-// router.post('/signup', (req, res) => {
-//   res.send('signup page!')
-// });
 
-
-
-// Testing ..... 
+// Testing ..... ( remove later / or use them for Admin app ) 
 
 router.get('/bcrypt', (req, res) => {
   const password = "password";

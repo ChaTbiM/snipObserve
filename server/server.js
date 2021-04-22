@@ -6,19 +6,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const { sequelize } = require('./database/db');
 const port = 3000;
+const { sequelize } = require('./database/db');
 
 app.use(cors());
 app.use(bodyParser.json())
 
 
 // Routes
-const { authRoutes } = require('./routes/index.js');
+const { authRoutes, SessionRoutes  } = require('./routes/index.js');
 
 app.use('/', authRoutes);
-
-
+app.use('/', SessionRoutes);
 
 
 
