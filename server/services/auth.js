@@ -8,11 +8,15 @@ function generateToken (user){
 function verifyToken (token){
     try {
         const match = jwt.verify(token,process.env.JWT_SECRET);
-        if(match) return true;
+        if(match) return match;
     } catch (error) {
         return false;
     }
 }
 
+function getToken(authorizationHeader){
+    return authorizationHeader.split(" ")[0] === "Bearer" ? authorizationHeader.split(" ")[1] : null;
+}
 
-module.exports = {generateToken,verifyToken}
+
+module.exports = {generateToken,verifyToken,getToken}

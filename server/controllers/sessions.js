@@ -1,8 +1,19 @@
 const SessionsService = require('../services/session');
+const {getToken} = require('../services/auth');
+const {getProfessorId} = require('../services/user')
 
 async function getAllSessionsByProfessorId(req, res) {
     const { getAllSessionsByProfessorId } = SessionsService;
-    const { id } = req.body;
+
+    let token = null;
+    
+    try {
+        token = getToken(req.headers.authorization);  
+    } catch (error) {
+        res.status(401).json("you are not authorized");        
+    }
+
+    const professorId = getProfessorId(token);
 
     let response = {
         success: false,
@@ -11,7 +22,7 @@ async function getAllSessionsByProfessorId(req, res) {
     };
 
     try {
-        const sessions = await getAllSessionsByProfessorId(id);
+        const sessions = await getAllSessionsByProfessorId(professorId);
 
         if (sessions === null) {
             throw new Exception("no sessions was found")

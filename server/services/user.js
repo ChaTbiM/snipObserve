@@ -1,6 +1,6 @@
 const { models } = require("../database/db");
 const bcrypt = require("bcrypt");
-const { generateToken } = require('./auth');
+const { generateToken, verifyToken } = require('./auth');
 
 
 async function login(userInfo) {
@@ -11,7 +11,7 @@ async function login(userInfo) {
     let foundUser = await Enseignants.findOne({ where: { email } });
 
     let passwordMatch = await bcrypt.compare(password, foundUser.pwdEnseignant);
-    
+
     if (!passwordMatch) {
         return null;
     }
@@ -21,6 +21,10 @@ async function login(userInfo) {
     return token;
 }
 
+function getProfessorId(token) {
+    return verifyToken(token).refEnseignant;
+}
 
 
-module.exports = { loginService: login };
+
+module.exports = { loginService: login, getProfessorId };
