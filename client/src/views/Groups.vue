@@ -32,6 +32,7 @@ import { defineComponent } from "vue";
 
 import Header from "../components/Header";
 import GroupsList from "../components/GroupsList";
+import { Plugins } from "@capacitor/core";
 
 export default defineComponent({
   name: "Groups",
@@ -106,7 +107,27 @@ export default defineComponent({
     toggleGroup(specialtyIndex, index) {
       this.specialties[specialtyIndex].collection[index].isCollapsed = !this
         .specialties[specialtyIndex].collection[index].isCollapsed;
+    },
+    async fetchSessions() {
+      const { Http } = Plugins;
+      const { data, status } = await Http.request({
+        method: "GET",
+        url: "http://localhost:3000/sessions",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token") || null}`
+        }
+      });
+
+      if (status === 200) {
+        console.log("data", data);
+      }
     }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      this.fetchSessions();
+    });
   }
 });
 </script>
