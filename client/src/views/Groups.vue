@@ -66,7 +66,7 @@ export default defineComponent({
               isCollapsed: true
             }
           ],
-          isCollapsed: false
+          isCollapsed: true
         },
         {
           name: "mathematics",
@@ -90,10 +90,10 @@ export default defineComponent({
               isCollapsed: true
             }
           ],
-          isCollapsed: false
+          isCollapsed: true
         }
-      ],
-      isSpecialtyCollapsed: [false, false, false]
+      ]
+      // isSpecialtyCollapsed: [false, false, false]
     };
   },
   methods: {
@@ -110,7 +110,10 @@ export default defineComponent({
     },
     async fetchSessions() {
       const { Http } = Plugins;
-      const { data, status } = await Http.request({
+      const {
+        data: { data: specialties },
+        status
+      } = await Http.request({
         method: "GET",
         url: "http://localhost:3000/sessions",
         headers: {
@@ -120,7 +123,17 @@ export default defineComponent({
       });
 
       if (status === 200) {
-        console.log("data", data);
+        for (let specialty in specialties) {
+          specialties[specialty].isCollapsed = true;
+          for (let year in specialties[specialty]) {
+            specialties[specialty][year] = Object.assign(
+              {},
+              specialties[specialty][year]
+            );
+            specialties[specialty][year].isCollapsed = true;
+          }
+        }
+        console.log("data", specialties);
       }
     }
   },
