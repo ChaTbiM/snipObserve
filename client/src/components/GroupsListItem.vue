@@ -1,6 +1,14 @@
 <template>
-  <ion-label @mouseenter="hover = true" @mouseleave="hover = false">
-    Group Number: {{ groupNumber }}
+  <ion-label>
+    <ion-text class="moduleName">
+      <p>
+        {{ moduleName }}
+      </p>
+    </ion-text>
+    <br />
+    <ion-text>
+      <p>Groupe : {{ groupNumber }}</p>
+    </ion-text>
   </ion-label>
 </template>
 
@@ -9,14 +17,15 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "GroupListItem",
-  props: ["groupNumber"],
+  props: ["groupNumber", "moduleName"],
   data: () => {
-    return {
-      hover: false
-    };
+    return {};
   }
 });
 </script>
 
-<style>
-</style>
+<style scoped>
+.moduleName {
+  white-space: normal;
+}
+</style>>

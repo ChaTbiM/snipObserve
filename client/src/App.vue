@@ -12,10 +12,6 @@
             <ion-icon :icon="happy" slot="start" />
             <ion-label>Groups</ion-label>
           </ion-item>
-          <ion-item router-link="/profile"
-            ><ion-icon :icon="happy" slot="start" />
-            <ion-label>Profile</ion-label></ion-item
-          >
         </ion-list>
       </ion-content>
     </ion-menu>

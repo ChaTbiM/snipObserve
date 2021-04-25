@@ -2,27 +2,32 @@
   <ion-page>
     <Header />
     <ion-content fullscreen>
-      <ion-card v-for="(specialty, index) in specialties" :key="index">
-        <ion-card-header>
-          <ion-card-title @click.prevent="toggleSpecialty(index)">
-            <!-- Specialities -->
-            <ion-item-divider color="primary">
-              <ion-label>
-                {{ specialtyCapitalized(specialty.name) }}
-              </ion-label>
-            </ion-item-divider>
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <span v-if="!specialty.isCollapsed">
-            <groups-list
-              @toggleGroup="toggleGroup"
-              :collection="specialty.collection"
-              :specialtyIndex="index"
-            />
-          </span>
-        </ion-card-content>
-      </ion-card>
+      <span v-if="specialties">
+        <ion-card
+          v-for="(specialty, specialtyName) in specialties"
+          :key="specialtyName"
+        >
+          <ion-card-header>
+            <ion-card-title @click.prevent="toggleSpecialty(specialtyName)">
+              <!-- Specialities -->
+              <ion-item-divider color="primary">
+                <ion-label>
+                  {{ specialtyName }}
+                </ion-label>
+              </ion-item-divider>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <span v-if="!specialty.isCollapsed">
+              <groups-list
+                @toggleGroup="toggleGroup"
+                :specialty="specialty"
+                :specialtyIndex="specialtyName"
+              />
+            </span>
+          </ion-card-content>
+        </ion-card>
+      </span>
     </ion-content>
   </ion-page>
 </template>
@@ -42,71 +47,22 @@ export default defineComponent({
   },
   data: () => {
     return {
-      specialties: [
-        {
-          name: "computer science",
-          collection: [
-            {
-              grade: "first",
-              groups: [
-                { id: 1, number: 1 },
-                { id: 2, number: 5 },
-                { id: 3, number: 3 }
-              ],
-              isCollapsed: true
-            },
-            {
-              grade: "third",
-              groups: [
-                { id: 3, number: 1 },
-                { id: 4, number: 5 },
-                { id: 5, number: 3 }
-              ],
-
-              isCollapsed: true
-            }
-          ],
-          isCollapsed: true
-        },
-        {
-          name: "mathematics",
-          collection: [
-            {
-              grade: "second",
-              groups: [
-                { id: 6, number: 1 },
-                { id: 7, number: 5 },
-                { id: 8, number: 3 }
-              ],
-              isCollapsed: true
-            },
-            {
-              grade: "fourth",
-              groups: [
-                { id: 9, number: 1 },
-                { id: 10, number: 5 },
-                { id: 11, number: 3 }
-              ],
-              isCollapsed: true
-            }
-          ],
-          isCollapsed: true
-        }
-      ]
-      // isSpecialtyCollapsed: [false, false, false]
+      specialties: []
     };
   },
   methods: {
     specialtyCapitalized(specialty) {
       return specialty.toUpperCase();
     },
-    toggleSpecialty(index) {
-      this.specialties[index].isCollapsed = !this.specialties[index]
-        .isCollapsed;
+    toggleSpecialty(specialtyName) {
+      this.specialties[specialtyName].isCollapsed = !this.specialties[
+        specialtyName
+      ].isCollapsed;
     },
     toggleGroup(specialtyIndex, index) {
-      this.specialties[specialtyIndex].collection[index].isCollapsed = !this
-        .specialties[specialtyIndex].collection[index].isCollapsed;
+      this.specialties[specialtyIndex][index].isCollapsed = !this.specialties[
+        specialtyIndex
+      ][index].isCollapsed;
     },
     async fetchSessions() {
       const { Http } = Plugins;
@@ -124,16 +80,25 @@ export default defineComponent({
 
       if (status === 200) {
         for (let specialty in specialties) {
-          specialties[specialty].isCollapsed = true;
           for (let year in specialties[specialty]) {
             specialties[specialty][year] = Object.assign(
-              {},
               specialties[specialty][year]
             );
-            specialties[specialty][year].isCollapsed = true;
+            Object.defineProperty(specialties[specialty][year], "isCollapsed", {
+              configurable: true,
+              writable: true,
+              value: true,
+              enumerable: false
+            });
           }
+          Object.defineProperty(specialties[specialty], "isCollapsed", {
+            configurable: true,
+            writable: true,
+            value: true,
+            enumerable: false
+          });
         }
-        console.log("data", specialties);
+        this.specialties = specialties;
       }
     }
   },

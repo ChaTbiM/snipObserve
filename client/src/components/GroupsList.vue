@@ -1,24 +1,35 @@
 <template>
-  <!-- Per year -->
-  <ion-list v-for="(item, index) in collection" :key="index">
+  <ion-list
+    v-for="(groups, year) in specialty"
+    :key="year + 'index' + groups.session_id"
+  >
     <ion-item-divider
-      @click="toggleGroups(index)"
+      @click="toggleGroups(year)"
       color="tertiary"
       class="grade"
     >
-      <ion-label> {{ item.grade }} year </ion-label>
+      <ion-label>
+        {{ year }}
+      </ion-label>
     </ion-item-divider>
-    <!-- Per Group -->
-    <ion-item-group v-if="!item.isCollapsed">
+    <ion-item-group v-if="!groups.isCollapsed">
       <ion-item
-        v-for="(group, groupIndex) in item.groups"
+        v-for="(group, groupIndex) in groups"
         :key="groupIndex"
-        @click="this.$router.push({ name: 'Group', params: { id: group.id } })"
+        @click="
+          this.$router.push({
+            name: 'Group',
+            params: {
+              session_id: group.session_id,
+              group_id: group.group_number
+            }
+          })
+        "
       >
-        <!-- <ion-label router-link="/group/15">
-          Group Number: {{ group }}
-        </ion-label> -->
-        <GroupListItem :groupNumber="group.number" />
+        <GroupListItem
+          :groupNumber="group.group_number"
+          :moduleName="group.module_name"
+        />
       </ion-item>
     </ion-item-group>
   </ion-list>
@@ -33,16 +44,13 @@ export default defineComponent({
   components: {
     GroupListItem
   },
-  props: ["collection", "isGradeCollapsed", "specialtyIndex"],
+  props: ["specialty", "isGradeCollapsed", "specialtyIndex"],
   data: () => {
     return {};
   },
   methods: {
     toggleGroups(index) {
       this.$emit("toggleGroup", this.specialtyIndex, index);
-    },
-    toggleHoverEffect(event) {
-      console.log(event.target);
     }
   }
 });

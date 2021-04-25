@@ -42,7 +42,7 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
-    path: '/group/:id',
+    path: '/group/:group_id/session/:session_id',
     name: "Group",
     component: Students,
     beforeEnter: ifAuthenticated

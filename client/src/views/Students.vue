@@ -10,7 +10,6 @@
           <ion-icon :icon="personCircleOutline" slot="start"></ion-icon>
           <ion-label>
             <h3>{{ student.firstName }} {{ student.lastName }}</h3>
-            <p>number of absences : 2</p>
           </ion-label>
         </ion-item>
       </ion-list>
