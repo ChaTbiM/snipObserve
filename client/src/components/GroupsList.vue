@@ -16,15 +16,7 @@
       <ion-item
         v-for="(group, groupIndex) in groups"
         :key="groupIndex"
-        @click="
-          this.$router.push({
-            name: 'Group',
-            params: {
-              session_id: group.session_id,
-              group_id: group.group_number
-            }
-          })
-        "
+        @click="goToSudentsRoute(group)"
       >
         <GroupListItem
           :groupNumber="group.group_number"
@@ -51,6 +43,17 @@ export default defineComponent({
   methods: {
     toggleGroups(index) {
       this.$emit("toggleGroup", this.specialtyIndex, index);
+    },
+    goToSudentsRoute(group) {
+      this.$store.commit("SET_SPECIALTY_CODE", group.Annee);
+
+      this.$router.push({
+        name: "Group",
+        params: {
+          session_id: group.session_id,
+          group_id: group.group_number
+        }
+      });
     }
   }
 });

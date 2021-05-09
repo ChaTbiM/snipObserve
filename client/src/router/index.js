@@ -45,6 +45,7 @@ const routes = [
     path: '/group/:group_id/session/:session_id',
     name: "Group",
     component: Students,
+    props: true,
     beforeEnter: ifAuthenticated
   },
 ]

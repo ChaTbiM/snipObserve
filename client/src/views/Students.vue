@@ -4,7 +4,7 @@
     <ion-content fullscreen>
       <ion-list>
         <ion-list-header>
-          Students
+          <p>{{ selectedSpecialtyCode }}</p>
         </ion-list-header>
         <ion-item v-for="(student, index) in students" :key="index">
           <ion-icon :icon="personCircleOutline" slot="start"></ion-icon>
@@ -20,6 +20,7 @@
 <script>
 import { defineComponent } from "vue";
 import { personCircleOutline } from "ionicons/icons";
+import { mapState } from "vuex";
 
 import Header from "../components/Header";
 
@@ -94,7 +95,8 @@ export default defineComponent({
         }
       ]
     };
-  }
+  },
+  computed: mapState(["selectedSpecialtyCode"])
 });
 </script>
 
