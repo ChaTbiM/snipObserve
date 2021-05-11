@@ -17,8 +17,8 @@ module.exports = {
          autoIncrement: true,
        },
        session_id: Sequelize.INTEGER,
-       student_id: Sequelize.INTEGER,
-       absences_number: Sequelize.TINYINT,
+       student_id: Sequelize.STRING,
+       absent: Sequelize.ENUM(1,0),
        session_evaluation: Sequelize.ENUM(1, 0),
        test_grade: Sequelize.FLOAT
      });

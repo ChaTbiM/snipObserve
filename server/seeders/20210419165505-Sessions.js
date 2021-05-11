@@ -8,8 +8,8 @@ module.exports = {
      * Add seed commands here.
      *
      * Example:
-      Classes 1st year Licence : M211_LS: Physique 
-      Classes 2nd year Licence : BOT._LS : Botanique
+      Classes 1st year Licence : M211_LS: Physique // 1SNVTCSNV
+      Classes 2nd year Licence : BOT._LS : Botanique // 2SNVTCSB
       Classes 3rd year Licence : Mi.Al_LS :	Microbiologie Alimentaire
       Classes 1st year Masters : A.P.P_MS :  Analyses des propriétés physicochimiques des biomolécules
       Classes 2nd year Master:  M3:MB_MS : Modification des biomolécules par voie chimique et enzymatiq , 
