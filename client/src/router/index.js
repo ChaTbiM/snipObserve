@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Login from '../views/Login.vue'
 import Groups from '../views/Groups'
 import Students from '../views/Students'
+import Student from '../views/Student';
 
 import store from '../store' // your vuex store 
 
@@ -45,6 +46,13 @@ const routes = [
     path: '/group/:group_id/session/:session_id',
     name: "Group",
     component: Students,
+    props: true,
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: '/student/:student_id',
+    name: "Student",
+    component: Student,
     props: true,
     beforeEnter: ifAuthenticated
   },

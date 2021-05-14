@@ -6,12 +6,14 @@
         <ion-list-header>
           <p>{{ selectedSpecialtyCode }}</p>
         </ion-list-header>
-        <ion-item v-for="(student, index) in students" :key="index">
-          <ion-icon :icon="personCircleOutline" slot="start"></ion-icon>
-          <ion-label>
-            <h3>{{ student.firstName }} {{ student.lastName }}</h3>
-          </ion-label>
-        </ion-item>
+        <span v-for="(student, index) in students" :key="index">
+          <ion-item @click="goToStudent(student.id)">
+            <ion-icon :icon="personCircleOutline" slot="start"></ion-icon>
+            <ion-label>
+              <h3>{{ student.firstName }} {{ student.lastName }}</h3>
+            </ion-label>
+          </ion-item>
+        </span>
       </ion-list>
     </ion-content>
   </ion-page>
@@ -29,67 +31,93 @@ export default defineComponent({
   components: {
     Header
   },
+  methods: {
+    goToStudent(student_id) {
+      this.$router.push({
+        name: "Student",
+        params: {
+          student_id
+        }
+      });
+    }
+  },
   data: () => {
     return {
       personCircleOutline,
       students: [
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
+
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         },
         {
+          id: 1,
           firstName: "mustapha",
           lastName: "chatbi"
         }
