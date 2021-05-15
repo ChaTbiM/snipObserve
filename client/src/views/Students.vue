@@ -24,6 +24,8 @@ import { defineComponent } from "vue";
 import { personCircleOutline } from "ionicons/icons";
 import { mapState } from "vuex";
 
+import { Plugins } from "@capacitor/core";
+
 import Header from "../components/Header";
 
 export default defineComponent({
@@ -39,6 +41,24 @@ export default defineComponent({
           student_id
         }
       });
+    },
+    async fetchStudents(specialtyCode) {
+      const { Http } = Plugins;
+      const {
+        data: { data: students },
+        status
+      } = await Http.request({
+        method: "GET",
+        url: `http://localhost:3000/students/${this.$route.params.group_id}/specialty/${specialtyCode}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token") || null}`
+        }
+      });
+
+      if (status === 200) {
+        this.students = students[0];
+      }
     }
   },
   data: () => {
@@ -124,7 +144,14 @@ export default defineComponent({
       ]
     };
   },
-  computed: mapState(["selectedSpecialtyCode"])
+  computed: mapState(["selectedSpecialtyCode"]),
+  mounted() {
+    this.$nextTick(function() {
+      let specialtyCode = this.selectedSpecialtyCode;
+      console.log("specialty", specialtyCode);
+      this.fetchStudents(specialtyCode);
+    });
+  }
 });
 </script>
 
