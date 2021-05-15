@@ -14,10 +14,11 @@ app.use(bodyParser.json())
 
 
 // Routes
-const { authRoutes, SessionRoutes  } = require('./routes/index.js');
+const { authRoutes, SessionRoutes, StudentRoutes } = require('./routes/index.js');
 
 app.use('/', authRoutes);
 app.use('/', SessionRoutes);
+app.use('/', StudentRoutes)
 
 
 

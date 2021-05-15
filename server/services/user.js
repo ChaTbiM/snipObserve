@@ -1,6 +1,6 @@
-const { models } = require("../database/db");
 const bcrypt = require("bcrypt");
 const { generateToken, verifyToken } = require('./auth');
+const { sequelize, models } = require("../database/db");
 
 
 async function login(userInfo) {
@@ -25,6 +25,19 @@ function getProfessorId(token) {
     return verifyToken(token).refEnseignant;
 }
 
+async function getStudentsByGroupAndSpecialty(groupId, specialtyCode) {
+    let student = null;
+    student = await sequelize.query(`SELECT [N°Ins] AS id , Nom_Etudiant AS lastName, Prénom_Etudiant AS firstName FROM Etudiants E 
+    WHERE E.Réf_Group = ${groupId} AND E.AnnéeCycle = '${specialtyCode}' ;
+    `);
+
+    if(!student){
+        return null
+    }
+
+    return student;
+}
 
 
-module.exports = { loginService: login, getProfessorId };
+
+module.exports = { loginService: login, getProfessorId, getStudentsByGroupAndSpecialtyService: getStudentsByGroupAndSpecialty };
