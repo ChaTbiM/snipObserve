@@ -8,6 +8,7 @@ export default createStore({
     selectedClassId: null,
     selectedGroupNumber: null,
     selectedStudentName: null,
+    selectedSessionId: null
   },
   getters: {
     tokenValue: state => {
@@ -24,6 +25,9 @@ export default createStore({
     },
     selectedStudentName: state => {
       return state.selectedStudentName
+    },
+    selectedSessionId: state => {
+      return state.selectedSessionId
     },
   },
   mutations: {
@@ -42,6 +46,9 @@ export default createStore({
     SET_STUDENT_NAME: (state, studentName) => {
       return state.selectedStudentName = studentName;
     },
+    SET_SELECTED_SESSION_ID: (state, sessionId) => {
+      return state.selectedSessionId = sessionId;
+    }
   },
   actions: {
   },

@@ -3,9 +3,9 @@
     <Header />
     <ion-content fullscreen>
       <!-- Input for current session -->
-      <AssessmentForm  :studentName="this.selectedStudentName" />
+      <AssessmentForm :studentName="this.selectedStudentName" />
       <!-- Load Previous Observations and absences -->
-      <HistoricalAssessment  :assessments="this.controls" />
+      <HistoricalAssessment :assessments="this.controls" />
     </ion-content>
   </ion-page>
 </template>
@@ -31,7 +31,7 @@ export default defineComponent({
     };
   },
   methods: {
-    async fetchControls() {
+    async fetchHistoricControls() {
       const { Http } = Plugins;
       const student_id = this.$route.params.student_id;
       const {
@@ -49,21 +49,49 @@ export default defineComponent({
       if (status === 200 && controls) {
         this.controls = controls[0];
       }
+    },
+    async fetchCurrentControl() {
+      const { Http } = Plugins;
+      const student_id = this.$route.params.student_id;
+      const session_id = this.selectedSessionId;
+
+      const {
+        data: { data: control },
+        status
+      } = await Http.request({
+        method: "GET",
+        url: `http://localhost:3000/control/student/${student_id}/session/${session_id}/`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token") || null}`
+        }
+      });
+
+      if (status === 200 && control) {
+        console.log("control data", control);
+        this.control = control[0];
+      }
     }
   },
   computed: mapState([
     "selectedClassId",
     "selectedGroupNumber",
-    "selectedStudentName"
+    "selectedStudentName",
+    "selectedSessionId"
   ]),
   mounted() {
     this.$nextTick(function() {
-      this.fetchControls();
+      this.fetchHistoricControls();
+      this.fetchCurrentControl();
     });
   },
   updated() {
     if (this.selectedClassId && this.selectedGroupNumber) {
-      this.fetchControls();
+      this.fetchHistoricControls();
+    }
+
+    if (this.selectedSessionId) {
+      this.fetchCurrentControl();
     }
   }
 });

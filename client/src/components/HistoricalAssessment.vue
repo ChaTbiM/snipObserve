@@ -34,7 +34,7 @@ export default defineComponent({
       let dateNumber = date.getDate();
       let month = date.getMonth();
       let year = date.getFullYear();
-      let hours = date.getHours();
+      let hours = date.getUTCHours();
       let minutes = date.getMinutes();
       return (
         dateNumber + "/" + month + "/" + year + "  " + hours + ":" + minutes
