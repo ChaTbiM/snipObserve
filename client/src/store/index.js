@@ -5,6 +5,9 @@ export default createStore({
   state: {
     token,
     selectedSpecialtyCode: null,
+    selectedClassId: null,
+    selectedGroupNumber: null,
+    selectedStudentName: null,
   },
   getters: {
     tokenValue: state => {
@@ -13,6 +16,15 @@ export default createStore({
     selectedSpecialtyCode: state => {
       return state.selectedSpecialtyCode
     },
+    selectedClassId: state => {
+      return state.selectedClassId
+    },
+    selectedGroupNumber: state => {
+      return state.selectedGroupNumber
+    },
+    selectedStudentName: state => {
+      return state.selectedStudentName
+    },
   },
   mutations: {
     AUTH_SUCCESS: (state, token) => {
@@ -20,6 +32,15 @@ export default createStore({
     },
     SET_SPECIALTY_CODE: (state, code) => {
       return state.selectedSpecialtyCode = code.slice(0, -1);
+    },
+    SET_CLASS_ID: (state, classId) => {
+      return state.selectedClassId = classId;
+    },
+    SET_GROUP_NUMBER: (state, groupNumber) => {
+      return state.selectedGroupNumber = groupNumber;
+    },
+    SET_STUDENT_NAME: (state, studentName) => {
+      return state.selectedStudentName = studentName;
     },
   },
   actions: {

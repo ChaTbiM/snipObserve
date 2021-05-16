@@ -2,9 +2,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>
-        <ion-label>
-          Assess Mustapha Chatbi
-        </ion-label>
+        <ion-label> Assess {{ studentName }} </ion-label>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -39,6 +37,11 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "AssessmentForm",
+  props: {
+    studentName: {
+      default: "mustapha chatbi"
+    }
+  },
   data() {
     return {
       isParticipating: false,

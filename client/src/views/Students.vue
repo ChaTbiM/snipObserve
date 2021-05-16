@@ -7,7 +7,7 @@
           <p>{{ selectedSpecialtyCode }}</p>
         </ion-list-header>
         <span v-for="(student, index) in students" :key="index">
-          <ion-item @click="goToStudent(student.id)">
+          <ion-item @click="goToStudent(student)">
             <ion-icon :icon="personCircleOutline" slot="start"></ion-icon>
             <ion-label>
               <h3>{{ student.firstName }} {{ student.lastName }}</h3>
@@ -34,11 +34,13 @@ export default defineComponent({
     Header
   },
   methods: {
-    goToStudent(student_id) {
+    goToStudent(student) {
+      let studentName = student.lastName + " " + student.firstName;
+      this.$store.commit("SET_STUDENT_NAME", studentName.toLowerCase());
       this.$router.push({
         name: "Student",
         params: {
-          student_id
+          student_id: student.id
         }
       });
     },
@@ -56,7 +58,7 @@ export default defineComponent({
         }
       });
 
-      if (status === 200) {
+      if (status === 200 && students) {
         this.students = students[0];
       }
     }
@@ -148,9 +150,14 @@ export default defineComponent({
   mounted() {
     this.$nextTick(function() {
       let specialtyCode = this.selectedSpecialtyCode;
-      console.log("specialty", specialtyCode);
       this.fetchStudents(specialtyCode);
     });
+  },
+  updated() {
+    let specialtyCode = this.selectedSpecialtyCode;
+    if (specialtyCode) {
+      this.fetchStudents(specialtyCode);
+    }
   }
 });
 </script>

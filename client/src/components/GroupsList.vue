@@ -46,6 +46,8 @@ export default defineComponent({
     },
     goToSudentsRoute(group) {
       this.$store.commit("SET_SPECIALTY_CODE", group.Annee);
+      this.$store.commit("SET_CLASS_ID", group.class_id);
+      this.$store.commit("SET_GROUP_NUMBER", group.group_number);
 
       this.$router.push({
         name: "Group",

@@ -23,8 +23,6 @@ const ifAuthenticated = (to, from, next) => {
 }
 
 
-
-
 const routes = [
   {
     path: '/',
