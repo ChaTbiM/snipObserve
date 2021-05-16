@@ -3,7 +3,7 @@ const { sequelize, models } = require("../database/db");
 
 async function getAllSessionsByProfessorId(professorId) {
 
-    const sessions = await sequelize.query(`SELECT S.id AS session_id,C.Cours as module_name , group_number,date_time, Année AS Annee, Nbre_Année AS Nbre_Annee , Fillière AS Specialty FROM Options O 
+    const sessions = await sequelize.query(`SELECT S.class_id, S.id AS session_id,C.Cours as module_name , group_number,date_time, Année AS Annee, Nbre_Année AS Nbre_Annee , Fillière AS Specialty FROM Options O 
     INNER JOIN Cours C ON O.Code_fillière = C.FilièreEtude 
     INNER JOIN Sessions S ON S.class_id = C.Réf_Cours
     WHERE S.teacher_id = ${professorId} 
