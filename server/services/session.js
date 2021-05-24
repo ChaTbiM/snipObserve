@@ -2,6 +2,7 @@ const { sequelize, models } = require("../database/db");
 
 
 async function getAllSessionsByProfessorId(professorId) {
+    //TODO : get only this week sessions
 
     const sessions = await sequelize.query(`SELECT S.class_id, S.id AS session_id,C.Cours as module_name , group_number,date_time, Année AS Annee, Nbre_Année AS Nbre_Annee , Fillière AS Specialty FROM Options O 
     INNER JOIN Cours C ON O.Code_fillière = C.FilièreEtude 
