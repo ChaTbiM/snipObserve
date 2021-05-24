@@ -75,7 +75,7 @@ module.exports = {
     );
     `);
     // 7
-    await queryInterface.sequelize.query(`UPDATE Etudiants SET Réf_Group = 1
+    await queryInterface.sequelize.query(`UPDATE Etudiants SET Réf_Group = 7
     WHERE [N°Ins] IN 
     (
     '29131610543_LS',
@@ -96,10 +96,10 @@ module.exports = {
     await queryInterface.sequelize.query(`UPDATE Etudiants SET Réf_Group = 2 
     WHERE [N°Ins] IN 
     (
-    '29131610164_LS'
-    '29131610327_LS'
-    '29131610381_LS'
-    '29131610405_LS'
+    '29131610164_LS',
+    '29131610327_LS',
+    '29131610381_LS',
+    '29131610405_LS',
     '29131610481_LS'
     );
     `);
@@ -163,13 +163,13 @@ module.exports = {
     );
     `);
     // 2
-    await queryInterface.sequelize.query(`UPDATE Etudiants SET Réf_Group = 4 
+    await queryInterface.sequelize.query(`UPDATE Etudiants SET Réf_Group = 2
     WHERE [N°Ins] IN 
     (
-    '29141800006_MS'
-    '29141800008_MS'
-    '29141800009_MS'
-    '29141800010_MS'
+    '29141800006_MS',
+    '29141800008_MS',
+    '29141800009_MS',
+    '29141800010_MS',
     '29141800011_MS'
     );
     `);
