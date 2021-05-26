@@ -30,15 +30,16 @@ export default defineComponent({
   methods: {
     parseDate: function(date_time) {
       if (!date_time) return "--------";
-      let date = new Date(date_time);
-      let dateNumber = date.getDate();
-      let month = date.getMonth();
-      let year = date.getFullYear();
-      let hours = date.getUTCHours();
-      let minutes = date.getMinutes();
-      return (
-        dateNumber + "/" + month + "/" + year + "  " + hours + ":" + minutes
-      );
+
+      let parsedDate =
+        date_time.split("T")[0] +
+        " " +
+        date_time.substring(
+          date_time.lastIndexOf("T") + 1,
+          date_time.lastIndexOf(".")
+        );
+
+      return parsedDate;
     }
   }
 });
