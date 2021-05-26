@@ -3,12 +3,22 @@ const { sequelize, models } = require("../database/db");
 
 async function getAllSessionsByProfessorId(professorId) {
     //TODO : get only this week sessions
+    const today = new Date().toISOString(); // current date in ISO STRING FORMAT
 
-    const sessions = await sequelize.query(`SELECT S.class_id, S.id AS session_id,C.Cours as module_name , group_number,date_time, Année AS Annee, Nbre_Année AS Nbre_Annee , Fillière AS Specialty FROM Options O 
+    const sessions = await sequelize.query(`
+    SELECT S.class_id,rn, S.id AS session_id,C.Cours as module_name , group_number,date_time, Année AS Annee, Nbre_Année AS Nbre_Annee , Fillière AS Specialty FROM Options O 
     INNER JOIN Cours C ON O.Code_fillière = C.FilièreEtude 
-    INNER JOIN Sessions S ON S.class_id = C.Réf_Cours
-    WHERE S.teacher_id = ${professorId} 
-    ORDER BY group_number
+    INNER JOIN (
+                    SELECT * 
+                    ,row_number() 
+                    over (partition by class_id,group_number
+                            order by date_time ASC) as rn
+                    FROM Sessions
+                    WHERE date_time >= '2021-04-29'
+                ) as S on S.class_id = C.Réf_Cours
+    WHERE S.teacher_id = 103 
+	AND rn = 1
+    ORDER BY date_time ASC, group_number ASC;
     `);
 
     let sessionsBySpeciality = {};
@@ -19,9 +29,9 @@ async function getAllSessionsByProfessorId(professorId) {
 
         session.year = getYearFromYearCodeAndNumberOfYears(session[yearCode], session[numberOfYears])
 
-        if(session[specialtyCode].toLowerCase().includes("tc")){
-            const tcRegex = new RegExp("TC","i")
-            session[specialtyCode] = session[specialtyCode].replace(tcRegex,"Tronc commun")  
+        if (session[specialtyCode].toLowerCase().includes("tc")) {
+            const tcRegex = new RegExp("TC", "i")
+            session[specialtyCode] = session[specialtyCode].replace(tcRegex, "Tronc commun")
         }
 
         // Construct Organized DataStructure of Sessions
