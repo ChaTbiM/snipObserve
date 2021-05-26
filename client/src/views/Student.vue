@@ -3,7 +3,10 @@
     <Header />
     <ion-content fullscreen>
       <!-- Input for current session -->
-      <AssessmentForm :studentName="this.selectedStudentName" />
+      <AssessmentForm
+        :studentName="this.selectedStudentName"
+        :currentControl="this.control"
+      />
       <!-- Load Previous Observations and absences -->
       <HistoricalAssessment :assessments="this.controls" />
     </ion-content>
@@ -27,7 +30,8 @@ export default defineComponent({
   },
   data() {
     return {
-      controls: []
+      controls: [],
+      control: null
     };
   },
   methods: {
@@ -50,10 +54,8 @@ export default defineComponent({
         this.controls = controls[0];
       }
     },
-    async fetchCurrentControl() {
+    async fetchCurrentControl(student_id, session_id) {
       const { Http } = Plugins;
-      const student_id = this.$route.params.student_id;
-      const session_id = this.selectedSessionId;
 
       const {
         data: { data: control },
@@ -68,7 +70,6 @@ export default defineComponent({
       });
 
       if (status === 200 && control) {
-        console.log("control data", control);
         this.control = control[0];
       }
     }
@@ -90,8 +91,12 @@ export default defineComponent({
       this.fetchHistoricControls();
     }
 
-    if (this.selectedSessionId) {
-      this.fetchCurrentControl();
+    const student_id = this.$route.params.student_id;
+    const session_id = this.selectedSessionId;
+    const routeName = this.$route.name === "Student";
+
+    if (student_id && session_id && routeName) {
+      this.fetchCurrentControl(student_id, session_id);
     }
   }
 });

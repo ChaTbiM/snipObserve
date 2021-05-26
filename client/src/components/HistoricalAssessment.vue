@@ -38,7 +38,6 @@ export default defineComponent({
           date_time.lastIndexOf("T") + 1,
           date_time.lastIndexOf(".")
         );
-
       return parsedDate;
     }
   }

@@ -9,12 +9,7 @@
       <ion-list>
         <ion-item>
           <ion-label>Is Student Present ?</ion-label>
-          <ion-checkbox
-            color="secondary"
-            slot="end"
-            @update:modelValue="isPresent = $event"
-            :modelValue="isPresent"
-          >
+          <ion-checkbox color="secondary" slot="end" :checked="this.isPresent">
           </ion-checkbox>
         </ion-item>
         <ion-item>
@@ -22,14 +17,13 @@
           <ion-checkbox
             color="secondary"
             slot="end"
-            @update:modelValue="isParticipating = $event"
-            :modelValue="isParticipating"
+            :checked="this.isParticipating"
           >
           </ion-checkbox>
         </ion-item>
       </ion-list>
     </ion-card-content>
-    <ion-button color="primary">Insert</ion-button>
+    <ion-button color="primary">Update</ion-button>
   </ion-card>
 </template>
 
@@ -40,13 +34,20 @@ export default defineComponent({
   props: {
     studentName: {
       default: "mustapha chatbi"
-    }
+    },
+    currentControl: Object
   },
   data() {
     return {
       isParticipating: false,
       isPresent: false
     };
+  },
+  updated() {
+    if (this.currentControl) {
+      this.isPresent = !this.currentControl.absent;
+      this.isParticipating = this.currentControl.session_evaluation;
+    }
   }
 });
 </script>
