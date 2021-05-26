@@ -17,7 +17,7 @@ async function getControlsOfStudentService({ student_id, group_number, class_id,
     if (!controls) {
         return null;
     }
-    console.log('list of controls',controls);
+    
     return controls;
 }
 
