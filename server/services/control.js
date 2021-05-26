@@ -3,8 +3,8 @@ const { sequelize } = require("../database/db");
 
 async function getControlsOfStudentService({ student_id, group_number, class_id, professorId }) {
 
-    const today = new Date().toISOString(); // current date in ISO STRING FORMAT
-
+    const today = (new Date().toISOString()).split("T")[0]; // current date in ISO STRING FORMAT
+    
     const controls = await sequelize.query(`SELECT * FROM Control C
                                                 INNER JOIN Sessions S ON C.session_id = S.id 
                                                 WHERE S.group_number = ${group_number}
