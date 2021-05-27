@@ -13,7 +13,12 @@
         </ion-item>
         <ion-item>
           <ion-label>Has Student Participated ?</ion-label>
-          <input type="checkbox" v-model="this.isParticipating" />
+          <span v-if="this.isPresent">
+            <input type="checkbox" v-model="this.isParticipating" />
+          </span>
+          <span v-else>
+            <input type="checkbox" v-model="this.isParticipating" disabled />
+          </span>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -44,29 +49,30 @@ export default defineComponent({
       console.log("this", this.isPresent);
       const requestData = {
         absent: !this.isPresent ? 1 : 0,
-        session_evaluation: this.isParticipating ? 1 : 0
+        session_evaluation: this.isParticipating && this.isPresent ? 1 : 0
       };
 
       const { Http } = Plugins;
       const control_id = this.currentControl.id;
-      await Http.request({
+      const { status } = await Http.request({
         method: "PUT",
-        url: `http://localhost:3000/control/${control_id}`,
+        url: `http://192.168.1.7:3000/control/${control_id}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`
         },
         data: { ...requestData }
       });
-    },
-    updatePresence() {
-      console.log("is PREsent", !this.isPresent);
+      if (status === 200) {
+        this.$router.go(-1);
+      }
     }
   },
   updated() {
     if (this.currentControl) {
       this.isPresent = !this.currentControl.absent;
-      this.isParticipating = this.currentControl.session_evaluation;
+      this.isParticipating =
+        this.currentControl.session_evaluation == 1 ? true : false;
     }
   }
 });

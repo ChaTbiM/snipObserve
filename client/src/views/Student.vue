@@ -2,6 +2,21 @@
   <ion-page>
     <Header />
     <ion-content fullscreen>
+      <!-- Alert on Absences -->
+      <div v-if="this.numberOfAbsences >= 3 && this.numberOfAbsences < 5">
+        <ion-card color="warning">
+          <ion-card-content>
+            <p>student has 3 or more absences</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div v-if="this.numberOfAbsences >= 5">
+        <ion-card color="danger">
+          <ion-card-content>
+            <p>student has 5 or more absences</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
       <!-- Input for current session -->
       <AssessmentForm
         :studentName="this.selectedStudentName"
@@ -31,7 +46,8 @@ export default defineComponent({
   data() {
     return {
       controls: [],
-      control: null
+      control: null,
+      numberOfAbsences: 0
     };
   },
   methods: {
@@ -43,7 +59,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://localhost:3000/controls/student/${student_id}/class/${this.selectedClassId}/group/${this.selectedGroupNumber}/`,
+        url: `http://192.168.1.7:3000/controls/student/${student_id}/class/${this.selectedClassId}/group/${this.selectedGroupNumber}/`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`
@@ -52,6 +68,16 @@ export default defineComponent({
 
       if (status === 200 && controls) {
         this.controls = controls[0];
+
+        let numberOfAbsences = 0;
+
+        controls[0].forEach(control => {
+          if (control.absent) {
+            numberOfAbsences++;
+          }
+        });
+
+        this.numberOfAbsences = numberOfAbsences;
       }
     },
     async fetchCurrentControl(student_id, session_id) {
@@ -62,7 +88,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://localhost:3000/control/student/${student_id}/session/${session_id}/`,
+        url: `http://192.168.1.7:3000/control/student/${student_id}/session/${session_id}/`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`

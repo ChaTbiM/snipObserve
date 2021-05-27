@@ -16,18 +16,4 @@ router.get('/bcrypt', (req, res) => {
   return res.json(hashedPassword);
 })
 
-router.get('/check-crypted', async (req, res) => {
-  const password = "password";
-  const passwordHash = "$2b$10$BDJLRpMGJpZ4sMxTz122OeRzuVgyPjBdzAEtsYgGiVMPFiKGSSxpK";
-  const match = await bcrypt.compare(password, passwordHash);
-  if (match) {
-    return res.json(true)
-
-  }
-
-  return res.json(false)
-
-})
-
-
 module.exports = router;
