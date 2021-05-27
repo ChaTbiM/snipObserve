@@ -1,4 +1,4 @@
-const { getControlsOfStudentService , getCurrentControlBySessionService  } = require('../services/control')
+const { getControlsOfStudentService , getCurrentControlBySessionService , updateControlService  } = require('../services/control')
 const {getProfessorId} = require('../services/user')
 const {getToken} = require('../services/auth');
 
@@ -76,9 +76,38 @@ async function getCurrentControlBySession(req,res){
     }
 }
 
+async function updateControl(req,res){
+    const { control_id } = req.params
+    const {absent , session_evaluation} = req.body
+
+    let response = {
+        success: false,
+        data: null,
+        message: null,
+    };
+
+    try {
+         await updateControlService(control_id,absent,session_evaluation);
+
+        if (control === null) {
+            throw new Exception("control was not found")
+        }
+
+        response.data = "success";
+        response.success = true;
+        response.message = `Control with id ${control.id} updated successfully`
+
+        return res.json(response);
+    } catch (error) {
+        response.message = error.message;
+        return res.json(response);
+    }
+}
+
 const ControlController = {
     getControlsOfStudent,
-    getCurrentControlBySession
+    getCurrentControlBySession,
+    updateControl
 }
 
 module.exports = ControlController;

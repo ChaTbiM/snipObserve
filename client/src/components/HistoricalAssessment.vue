@@ -12,8 +12,8 @@
         <ion-item v-for="(assessment, index) in assessments" :key="index">
           <ion-label>
             <ion-text>Date : {{ parseDate(assessment.date_time) }}</ion-text>
-            <p>was absent ? : {{ assessment.absent }}</p>
-            <p>has participated ? : {{ assessment.session_evaluation }}</p>
+            <p>was absent ? : {{ !!assessment.absent }}</p>
+            <p>has participated ? : {{ !!assessment.session_evaluation }}</p>
           </ion-label>
         </ion-item>
       </ion-list>

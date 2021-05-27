@@ -14,9 +14,9 @@ async function getAllSessionsByProfessorId(professorId) {
                     over (partition by class_id,group_number
                             order by date_time ASC) as rn
                     FROM Sessions
-                    WHERE date_time >= '2021-04-29'
+                    WHERE date_time >= '${today}'
                 ) as S on S.class_id = C.Réf_Cours
-    WHERE S.teacher_id = 103 
+    WHERE S.teacher_id = ${professorId} 
 	AND rn = 1
     ORDER BY date_time ASC, group_number ASC;
     `);

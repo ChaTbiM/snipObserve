@@ -23,12 +23,14 @@
         </ion-item>
       </ion-list>
     </ion-card-content>
-    <ion-button color="primary">Update</ion-button>
+    <ion-button @click="updateControl" color="primary">Update</ion-button>
   </ion-card>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import { Plugins } from "@capacitor/core";
+
 export default defineComponent({
   name: "AssessmentForm",
   props: {
@@ -42,6 +44,30 @@ export default defineComponent({
       isParticipating: false,
       isPresent: false
     };
+  },
+  methods: {
+    async updateControl() {
+      const requestData = {
+        absent: this.isPresent ? 1 : 0,
+        session_evaluation: this.isParticipating ? 1 : 0
+      };
+
+      const { Http } = Plugins;
+      const control_id = this.currentControl.id;
+      const { status } = await Http.request({
+        method: "PUT",
+        url: `http://localhost:3000/control/${control_id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token") || null}`
+        },
+        data: { ...requestData }
+      });
+
+      if (status === 200) {
+        this.$router.go(-1);
+      }
+    }
   },
   updated() {
     if (this.currentControl) {

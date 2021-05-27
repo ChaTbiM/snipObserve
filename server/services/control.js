@@ -42,9 +42,22 @@ async function getCurrentControlBySessionService(session_id, student_id) {
 
 }
 
+async function updateControlService(control_id, absent, session_evaluation) {
+    if (control_id == null || absent == null || session_evaluation == null) {
+        return null
+    }
+
+    const control = await sequelize.query(`UPDATE Control SET absent = ${absent} , session_evaluation = ${session_evaluation}
+                                             WHERE id =${control_id};`)
+                                             
+
+    return true;
+}
+
 const ControlService = {
     getControlsOfStudentService,
-    getCurrentControlBySessionService
+    getCurrentControlBySessionService,
+    updateControlService
 }
 
 module.exports = ControlService;
