@@ -9,17 +9,11 @@
       <ion-list>
         <ion-item>
           <ion-label>Is Student Present ?</ion-label>
-          <ion-checkbox color="secondary" slot="end" :checked="this.isPresent">
-          </ion-checkbox>
+          <input type="checkbox" v-model="this.isPresent" />
         </ion-item>
         <ion-item>
           <ion-label>Has Student Participated ?</ion-label>
-          <ion-checkbox
-            color="secondary"
-            slot="end"
-            :checked="this.isParticipating"
-          >
-          </ion-checkbox>
+          <input type="checkbox" v-model="this.isParticipating" />
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -47,14 +41,15 @@ export default defineComponent({
   },
   methods: {
     async updateControl() {
+      console.log("this", this.isPresent);
       const requestData = {
-        absent: this.isPresent ? 1 : 0,
+        absent: !this.isPresent ? 1 : 0,
         session_evaluation: this.isParticipating ? 1 : 0
       };
 
       const { Http } = Plugins;
       const control_id = this.currentControl.id;
-      const { status } = await Http.request({
+      await Http.request({
         method: "PUT",
         url: `http://localhost:3000/control/${control_id}`,
         headers: {
@@ -63,10 +58,9 @@ export default defineComponent({
         },
         data: { ...requestData }
       });
-
-      if (status === 200) {
-        this.$router.go(-1);
-      }
+    },
+    updatePresence() {
+      console.log("is PREsent", !this.isPresent);
     }
   },
   updated() {
