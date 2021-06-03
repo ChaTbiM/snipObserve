@@ -2,8 +2,10 @@ const { sequelize, models } = require("../database/db");
 
 
 async function getAllSessionsByProfessorId(professorId) {
-    //TODO : get only this week sessions
     const today = new Date().toISOString(); // current date in ISO STRING FORMAT
+    
+    //TODO : give the teacher a margin
+    // myPastDate.setDate(myPastDate.getDate() - 8);
 
     const sessions = await sequelize.query(`
     SELECT S.class_id,rn, S.id AS session_id,C.Cours as module_name , group_number,date_time, Année AS Annee, Nbre_Année AS Nbre_Annee , Fillière AS Specialty FROM Options O 
