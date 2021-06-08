@@ -51,7 +51,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://192.168.1.7:3000/students/${this.$route.params.group_id}/specialty/${specialtyCode}`,
+        url: `http://192.168.1.5:3000/students/${this.$route.params.group_id}/specialty/${specialtyCode}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`

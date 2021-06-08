@@ -2,18 +2,14 @@
   <ion-page>
     <Header />
     <ion-content fullscreen>
-      <!-- Alert on Absences -->
-      <div v-if="this.numberOfAbsences >= 3 && this.numberOfAbsences < 5">
-        <ion-card color="warning">
-          <ion-card-content>
-            <p>student has 3 or more absences</p>
-          </ion-card-content>
-        </ion-card>
+      <div v-if="show">
+        <p>true</p>
       </div>
-      <div v-if="this.numberOfAbsences >= 5">
+      <!-- Alert on Absences -->
+      <div v-if="this.numberOfAbsences >= 3">
         <ion-card color="danger">
           <ion-card-content>
-            <p>student has 5 or more absences</p>
+            <p>student has 3 or more absences</p>
           </ion-card-content>
         </ion-card>
       </div>
@@ -47,7 +43,8 @@ export default defineComponent({
     return {
       controls: [],
       control: null,
-      numberOfAbsences: 0
+      numberOfAbsences: 0,
+      show: false
     };
   },
   methods: {
@@ -59,7 +56,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://192.168.1.7:3000/controls/student/${student_id}/class/${this.selectedClassId}/group/${this.selectedGroupNumber}/`,
+        url: `http://192.168.1.5:3000/controls/student/${student_id}/class/${this.selectedClassId}/group/${this.selectedGroupNumber}/`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`
@@ -76,7 +73,6 @@ export default defineComponent({
             numberOfAbsences++;
           }
         });
-
         this.numberOfAbsences = numberOfAbsences;
       }
     },
@@ -88,7 +84,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://192.168.1.7:3000/control/student/${student_id}/session/${session_id}/`,
+        url: `http://192.168.1.5:3000/control/student/${student_id}/session/${session_id}/`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`
