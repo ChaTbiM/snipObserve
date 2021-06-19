@@ -56,7 +56,7 @@ export default defineComponent({
       const control_id = this.currentControl.id;
       const { status } = await Http.request({
         method: "PUT",
-        url: `http://192.168.1.5:3000/control/${control_id}`,
+        url: `http://192.168.1.13:3000/control/${control_id}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`

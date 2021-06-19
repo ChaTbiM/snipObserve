@@ -56,7 +56,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://192.168.1.5:3000/controls/student/${student_id}/class/${this.selectedClassId}/group/${this.selectedGroupNumber}/`,
+        url: `http://192.168.1.13:3000/controls/student/${student_id}/class/${this.selectedClassId}/group/${this.selectedGroupNumber}/`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`
@@ -84,7 +84,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://192.168.1.5:3000/control/student/${student_id}/session/${session_id}/`,
+        url: `http://192.168.1.13:3000/control/student/${student_id}/session/${session_id}/`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`

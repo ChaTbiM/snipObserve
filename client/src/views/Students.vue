@@ -11,6 +11,7 @@
             <ion-icon :icon="personCircleOutline" slot="start"></ion-icon>
             <ion-label>
               <h3>{{ student.firstName }} {{ student.lastName }}</h3>
+              <h4>number of absences : {{ student.total_absences }}</h4>
             </ion-label>
           </ion-item>
         </span>
@@ -51,7 +52,7 @@ export default defineComponent({
         status
       } = await Http.request({
         method: "GET",
-        url: `http://192.168.1.5:3000/students/${this.$route.params.group_id}/specialty/${specialtyCode}`,
+        url: `http://192.168.1.13:3000/students/${this.$route.params.group_id}/specialty/${specialtyCode}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") || null}`
@@ -66,84 +67,7 @@ export default defineComponent({
   data: () => {
     return {
       personCircleOutline,
-      students: [
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        },
-        {
-          id: 1,
-          firstName: "mustapha",
-          lastName: "chatbi"
-        }
-      ]
+      students: null
     };
   },
   computed: mapState(["selectedSpecialtyCode"]),

@@ -58,7 +58,7 @@ export default defineComponent({
       const { Http } = Plugins;
       const { data, status } = await Http.request({
         method: "POST",
-        url: `http://192.168.1.5:3000/login/`,
+        url: `http://192.168.1.13:3000/login/`,
         headers: {
           "Content-Type": "application/json"
         },

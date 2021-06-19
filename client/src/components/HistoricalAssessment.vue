@@ -3,7 +3,7 @@
     <ion-card-header>
       <ion-card-title>
         <ion-label>
-          Historical Assesments
+          Historical Assessments
         </ion-label>
       </ion-card-title>
     </ion-card-header>
