@@ -26,16 +26,24 @@ function getProfessorId(token) {
 }
 
 async function getStudentsByGroupAndSpecialty(groupId, specialtyCode) {
-    let student = null;
-    student = await sequelize.query(`SELECT [N°Ins] AS id , Nom_Etudiant AS lastName, Prénom_Etudiant AS firstName FROM Etudiants E 
-    WHERE E.Réf_Group = ${groupId} AND E.AnnéeCycle = '${specialtyCode}' ;
+    let students = null;
+    console.log('spacialty ' , specialtyCode);
+    students = await sequelize.query(`
+    SELECT [N°Ins] AS id , Nom_Etudiant AS lastName, Prénom_Etudiant AS firstName , SUM(C.absent) as total_absences FROM Etudiants E
+    INNER JOIN Control C ON C.student_id = E.[N°Ins] 
+    WHERE E.Réf_Group = ${groupId} AND E.AnnéeCycle = '${specialtyCode}' 
+    GROUP BY [N°Ins] , Nom_Etudiant , Prénom_Etudiant;
     `);
 
-    if(!student){
+
+
+    console.log('students list', students)
+
+    if(!students){
         return null
     }
 
-    return student;
+    return students;
 }
 
 
